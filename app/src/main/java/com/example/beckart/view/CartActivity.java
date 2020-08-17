@@ -19,6 +19,7 @@ import com.example.beckart.ViewModel.CartViewModel;
 import com.example.beckart.adapter.CartAdapter;
 import com.example.beckart.databinding.ActivityCartBinding;
 import com.example.beckart.model.Product;
+import com.example.beckart.storage.CartUtils;
 import com.example.beckart.storage.LoginUtils;
 
 import java.util.List;
@@ -62,7 +63,9 @@ public class CartActivity extends AppCompatActivity {
                     if (productList.size() == 0) {
                         binding.noBookmarks.setVisibility(View.VISIBLE);
                         binding.emptyCart.setVisibility(View.VISIBLE);
+                        binding.bottomBar.setVisibility(View.GONE);
                     } else {
+                        binding.bottomBar.setVisibility(View.VISIBLE);
                         binding.bottomBar.setVisibility(View.VISIBLE);
                         binding.productsInCart.setVisibility(View.VISIBLE);
                     }
@@ -79,9 +82,10 @@ public class CartActivity extends AppCompatActivity {
                     public void onClick(View v) {
 
                         Intent shippingIntent = new Intent(CartActivity.this, com.example.beckart.view.ShippingAddressActivity.class);
-//                        shippingIntent.putExtra(PRODUCTID, product.getProductId());
+                        shippingIntent.putExtra("order_data", cartAdapter.getOrderData());
+                        shippingIntent.putExtra("order_amount", binding.totalPrice.getText().toString());
+                        Log.d("ONCLICK",cartAdapter.getOrderData());
                         startActivity(shippingIntent);
-                        Log.d("ONCLICK","Heeeeeeeeeeeeeeloi");
                     }
                 });
                 binding.loadingIndicator.setVisibility(View.GONE);
@@ -90,15 +94,18 @@ public class CartActivity extends AppCompatActivity {
             });
         } else {
             binding.emptyCart.setVisibility(View.VISIBLE);
+            binding.bottomBar.setVisibility(View.GONE);
             binding.loadingIndicator.setVisibility(View.GONE);
             binding.emptyCart.setText(getString(R.string.no_internet_connection));
         }
     }
 
     private double getTotal(List<Product> productList) {
+        CartUtils cartUtils = CartUtils.getInstance(getApplicationContext());
         double total =0;
         for(Product p:productList){
-            total+=p.getProductPrice();
+            int q = cartUtils.getQuantity(String.valueOf(p.getProductId()));
+            total+=(p.getProductPrice()*q);
         }
         return total;
     }

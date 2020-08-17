@@ -19,9 +19,15 @@ import com.example.beckart.ViewModel.FromCartViewModel;
 import com.example.beckart.databinding.ActivityCartBinding;
 import com.example.beckart.databinding.CartListItemBinding;
 import com.example.beckart.model.Product;
+import com.example.beckart.storage.CartUtils;
 import com.example.beckart.utils.RequestCallback;
+import com.example.beckart.view.CartActivity;
+import com.google.gson.Gson;
+
+import org.json.JSONObject;
 
 import java.text.DecimalFormat;
+import java.util.HashMap;
 import java.util.List;
 
 import static com.example.beckart.utils.Constant.LOCALHOST;
@@ -29,11 +35,10 @@ import static com.example.beckart.utils.Constant.LOCALHOST;
 public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder> {
 
     private Context mContext;
-
+    private HashMap<Integer,Integer> productMap;
     private List<com.example.beckart.model.Product> productsInCart;
-
     private com.example.beckart.model.Product currentProduct;
-
+    private CartUtils cartUtils;
     private com.example.beckart.ViewModel.AddFavoriteViewModel addFavoriteViewModel;
     private com.example.beckart.ViewModel.RemoveFavoriteViewModel removeFavoriteViewModel;
     private FromCartViewModel fromCartViewModel;
@@ -46,6 +51,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
         void onClick(Product product);
     }
 
+
     public CartAdapter(Context mContext, List<Product> productInCart, CartAdapterOnClickHandler clickHandler, FragmentActivity activity, ActivityCartBinding binding) {
         this.mContext = mContext;
         this.productsInCart = productInCart;
@@ -54,6 +60,8 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
         removeFavoriteViewModel = ViewModelProviders.of(activity).get(com.example.beckart.ViewModel.RemoveFavoriteViewModel.class);
         fromCartViewModel = ViewModelProviders.of(activity).get(com.example.beckart.ViewModel.FromCartViewModel.class);
         this.binding = binding;
+        this.productMap = new HashMap<>();
+        this.cartUtils = CartUtils.getInstance(mContext);
     }
 
     @NonNull
@@ -67,6 +75,9 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
     public void onBindViewHolder(@NonNull CartViewHolder holder, int position) {
         currentProduct = productsInCart.get(position);
         holder.binding.txtProductName.setText(currentProduct.getProductName());
+        int q  =cartUtils.getQuantity(String.valueOf(currentProduct.getProductId()));
+        productMap.put(currentProduct.getProductId(),q);
+        holder.binding.txtQuantity.setText(String.valueOf(q));
         DecimalFormat formatter = new DecimalFormat("#,###,###");
         String formattedPrice = formatter.format(currentProduct.getProductPrice());
         holder.binding.txtProductPrice.setText(mContext.getResources().getString(R.string.Rs)+" "+formattedPrice);
@@ -88,6 +99,10 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
             return 0;
         }
         return productsInCart.size();
+    }
+
+    public String getOrderData(){
+        return new Gson().toJson(productMap);
     }
 
     class CartViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
@@ -159,6 +174,8 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
             int q = Integer.parseInt(binding.txtQuantity.getText().toString());
             if(q>1){
                 binding.txtQuantity.setText(String.valueOf(q-1));
+                cartUtils.saveCartInfo(String.valueOf(currentProduct.getProductId()),q-1);
+                productMap.put(currentProduct.getProductId(),q-1);
                 decrementTotal();
             }
 
@@ -169,6 +186,8 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
             int q = Integer.parseInt(binding.txtQuantity.getText().toString());
 //            if(q<currentProduct.getProductQuantity()){
             binding.txtQuantity.setText(String.valueOf(q+1));
+            cartUtils.saveCartInfo(String.valueOf(currentProduct.getProductId()),q+1);
+            productMap.put(currentProduct.getProductId(),q+1);
             incrementTotal();
 //            }
         }
@@ -183,18 +202,33 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
             total-=currentProduct.getProductPrice();
             cartBinding.totalPrice.setText(String.valueOf(total));
         }
+        private void decreaseTotal() {
+            int q = cartUtils.getQuantity(String.valueOf(currentProduct.getProductId()));
+            cartUtils.clearProduct(String.valueOf(currentProduct.getProductId()));
+            double total = Double.parseDouble(cartBinding.totalPrice.getText().toString());
+            total-=(currentProduct.getProductPrice()*q);
+            cartBinding.totalPrice.setText(String.valueOf(total));
+        }
 
         private void deleteProductsInCart() {
             deleteFromCart(() -> {
                 currentProduct.setIsInCart(false);
                 notifyDataSetChanged();
             });
+            decreaseTotal();
             productsInCart.remove(getAdapterPosition());
             notifyItemRemoved(getAdapterPosition());
-            decrementTotal();
+            if(productMap.containsKey(currentProduct.getProductId())){
+                productMap.remove(currentProduct.getProductId());
+            }
             notifyItemRangeChanged(getAdapterPosition(), productsInCart.size());
+            if(productsInCart.size()==0){
+                cartBinding.bottomBar.setVisibility(View.INVISIBLE);
+                cartBinding.emptyCart.setVisibility(View.VISIBLE);
+                cartBinding.noBookmarks.setVisibility(View.VISIBLE);            }
             showSnackBar("Removed From Cart");
         }
+
 
         private void showSnackBar(String text) {
             Snackbar.make(itemView, text, Snackbar.LENGTH_SHORT).show();

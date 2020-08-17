@@ -181,6 +181,8 @@
     <string name="clear_all">Clear all</string>
     <string name="what_are_you_looking_for">What are you looking for?</string>
     <string name="itemCount">Total Products:</string>
+    <string name="country_required">Country Required</string>
+    <string name="enter_a_valid_zip">Enter Valid Zip No</string>
 
     <string-array name="categories_array">
         <item>Mobile</item>

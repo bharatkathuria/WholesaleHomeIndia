@@ -185,6 +185,11 @@
     <string name="itemCount">Total Products:</string>
     <string name="total" translatable="false">Total:  </string>
     <string name="checkout" translatable="false">Checkout</string>
+    <string name="address_required" translatable="false">Address Required</string>
+    <string name="city_required" translatable="false">City Required</string>
+    <string name="country_required">Country Required</string>
+    <string name="enter_a_valid_phoneno" translatable="false">Enter Valid Phone No</string>
+    <string name="enter_a_valid_zip">Enter Valid Zip</string>
 
     <string-array name="categories_array">
         <item>Pressure Cooker</item>

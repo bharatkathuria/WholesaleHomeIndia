@@ -23,6 +23,7 @@ import android.widget.Toast;
 import com.example.beckart.R;
 //import com.example.beckart.databinding.ActivityAccountBinding;
 import com.example.beckart.databinding.ActivityAccountBinding;
+import com.example.beckart.storage.CartUtils;
 import com.example.beckart.storage.LoginUtils;
 
 import static com.example.beckart.storage.LanguageUtils.getEnglishState;
@@ -76,6 +77,7 @@ public class AccountActivity extends AppCompatActivity implements View.OnClickLi
 
     private void signOut() {
         LoginUtils.getInstance(this).clearAll();
+        CartUtils.getInstance(this).clearAll();
         Intent intent = new Intent(this, com.example.beckart.view.LoginActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
