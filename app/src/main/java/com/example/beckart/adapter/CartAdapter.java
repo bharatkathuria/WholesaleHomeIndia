@@ -105,6 +105,15 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
         return new Gson().toJson(productMap);
     }
 
+    public int getOrderQuantity(){
+        int quantity=0;
+        for(int q:productMap.values()){
+            quantity+=q;
+        }
+        return quantity;
+    }
+
+
     class CartViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         // Create view instances

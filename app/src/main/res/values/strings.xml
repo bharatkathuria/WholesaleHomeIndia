@@ -169,6 +169,7 @@
     <string name="orders">Orders</string>
     <string name="order_n">ORDER N:</string>
     <string name="shipping">Shipping</string>
+    <string name="shipping_details" translatable="false">Shipping Details</string>
     <string name="user_address">23 Mohamed Ali St, Sidi Bishr</string>
     <string name="dummy_phone">01034238328</string>
     <string name="items_in_your_order">ITEMS IN YOUR ORDER</string>

@@ -55,12 +55,7 @@ public class ShippingAddressActivity extends AppCompatActivity implements View.O
         String country = binding.country.getText().toString().trim();
         String zip = binding.zip.getText().toString().trim();
         String phone = binding.phone.getText().toString().trim();
-        int userId = LoginUtils.getInstance(this).getUserInfo().getId();
-        Intent intent = getIntent();
-        String email = LoginUtils.getInstance(this).getUserInfo().getEmail();
 
-        String orderData = intent.getStringExtra("order_data");
-        String orderAmount = intent.getStringExtra("order_amount");
         if (address.isEmpty()) {
             binding.address.setError(getString(R.string.address_required));
             binding.address.requestFocus();
@@ -88,9 +83,14 @@ public class ShippingAddressActivity extends AppCompatActivity implements View.O
             return;
         }
 
-        String shippingAddress = address +" "+city+" "+country+" "+zip +" "+phone;
+        String shippingAddress = address +" "+city+" "+country+" "+zip;
 
-        Toast.makeText(ShippingAddressActivity.this, orderData, Toast.LENGTH_SHORT).show();
+        Intent checkoutIntent = new Intent(ShippingAddressActivity.this,CheckoutActivity.class);
+        checkoutIntent.putExtras(getIntent());
+        checkoutIntent.putExtra("shippingAddress",shippingAddress);
+        checkoutIntent.putExtra("phoneNo",phone);
+//        Toast.makeText(ShippingAddressActivity.this, orderData, Toast.LENGTH_SHORT).show();
+        startActivity(checkoutIntent);
 
 
 

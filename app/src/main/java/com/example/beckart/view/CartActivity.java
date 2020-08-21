@@ -82,8 +82,9 @@ public class CartActivity extends AppCompatActivity {
                     public void onClick(View v) {
 
                         Intent shippingIntent = new Intent(CartActivity.this, com.example.beckart.view.ShippingAddressActivity.class);
-                        shippingIntent.putExtra("order_data", cartAdapter.getOrderData());
-                        shippingIntent.putExtra("order_amount", binding.totalPrice.getText().toString());
+                        shippingIntent.putExtra("orderData", cartAdapter.getOrderData());
+                        shippingIntent.putExtra("orderAmount", Float.parseFloat(binding.totalPrice.getText().toString()));
+                        shippingIntent.putExtra("quantity", cartAdapter.getOrderQuantity());
                         Log.d("ONCLICK",cartAdapter.getOrderData());
                         startActivity(shippingIntent);
                     }

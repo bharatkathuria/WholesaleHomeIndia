@@ -39,7 +39,8 @@
             android:theme="@style/AppTheme.NoActionBar"
             tools:ignore="Instantiatable" />
 
-        <activity android:name=".view.LoginActivity"
+        <activity
+            android:name=".view.LoginActivity"
             tools:ignore="Instantiatable" />
 
         <activity
@@ -164,7 +165,16 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".view.ProductActivity" />
         </activity>
-        <activity android:name=".view.ShippingAddressActivity" />
+        <activity android:name=".view.ShippingAddressActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".view.CartActivity" />
+        </activity>
+        <activity android:name=".view.CheckoutActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".view.ShippingAddressActivity" />
+        </activity>
         <activity android:name=".view.OrderProductActivity" />
         <activity
             android:name=".view.OrdersActivity"
@@ -183,8 +193,10 @@
                 android:value=".view.OrdersActivity" />
         </activity>
 
-        <activity android:name=".view.SearchActivity" android:theme="@style/noAnimTheme" />
-        <activity android:name=".view.ResultActivity"/>
+        <activity
+            android:name=".view.SearchActivity"
+            android:theme="@style/noAnimTheme" />
+        <activity android:name=".view.ResultActivity" />
 
         <receiver android:name=".receiver.NetworkChangeReceiver" />
     </application>
