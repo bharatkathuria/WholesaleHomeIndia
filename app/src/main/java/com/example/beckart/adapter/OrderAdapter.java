@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 
 import com.example.beckart.R;
 import com.example.beckart.databinding.OrderListItemBinding;
+import com.example.beckart.model.CustomerOrder;
 import com.example.beckart.model.Order;
 
 import java.text.DecimalFormat;
@@ -19,8 +20,8 @@ import java.util.List;
 public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderViewHolder>{
 
     private Context mContext;
-    private List<Order> orderList;
-    private Order currentOrder;
+    private List<CustomerOrder> orderList;
+    private CustomerOrder currentOrder;
 
     private OrderAdapter.OrderAdapterOnClickHandler clickHandler;
 
@@ -28,10 +29,10 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderViewHol
      * The interface that receives onClick messages.
      */
     public interface OrderAdapterOnClickHandler {
-        void onClick(Order order);
+        void onClick(CustomerOrder order);
     }
 
-    public OrderAdapter(Context mContext, List<Order> orderList, OrderAdapter.OrderAdapterOnClickHandler clickHandler) {
+    public OrderAdapter(Context mContext, List<CustomerOrder> orderList, OrderAdapter.OrderAdapterOnClickHandler clickHandler) {
         this.mContext = mContext;
         this.orderList = orderList;
         this.clickHandler = clickHandler;
@@ -47,11 +48,9 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderViewHol
     @Override
     public void onBindViewHolder(@NonNull OrderViewHolder holder, int position) {
         currentOrder = orderList.get(position);
-
         DecimalFormat formatter = new DecimalFormat("#,###,###");
-        String formattedPrice = formatter.format(currentOrder.getProductPrice());
-        holder.binding.productPrice.setText(mContext.getResources().getString(R.string.Rs)+" "+formattedPrice);
-
+        String formattedPrice = formatter.format(currentOrder.getOrderAmount());
+        holder.binding.orderAmount.setText(mContext.getResources().getString(R.string.Rs)+" "+formattedPrice);
         holder.binding.orderNumber.setText(currentOrder.getOrderNumber());
         holder.binding.orderDate.setText(currentOrder.getOrderDate());
     }
@@ -81,7 +80,7 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderViewHol
             int position = getAdapterPosition();
             // Get position of the product
             currentOrder = orderList.get(position);
-            // Send product through click
+            // Send order through click
             clickHandler.onClick(currentOrder);
         }
     }

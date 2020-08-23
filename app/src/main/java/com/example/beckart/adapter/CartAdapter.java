@@ -23,6 +23,7 @@ import com.example.beckart.storage.CartUtils;
 import com.example.beckart.utils.RequestCallback;
 import com.example.beckart.view.CartActivity;
 import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 
 import org.json.JSONObject;
 

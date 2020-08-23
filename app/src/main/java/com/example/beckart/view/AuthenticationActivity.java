@@ -1,4 +1,5 @@
 package com.example.beckart.view;
+import android.app.ProgressDialog;
 import android.arch.lifecycle.LifecycleOwner;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
@@ -9,9 +10,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.beckart.R;
 import com.example.beckart.ViewModel.OtpViewModel;
+import com.example.beckart.ViewModel.RegisterViewModel;
 import com.example.beckart.databinding.ActivityAuthenticationBinding;
 import com.example.beckart.model.User;
 import com.example.beckart.storage.LoginUtils;
@@ -24,18 +27,21 @@ public class AuthenticationActivity extends AppCompatActivity implements View.On
     private static final String TAG = "AuthenticationActivity";
     private ActivityAuthenticationBinding binding;
     private OtpViewModel otpViewModel;
+    private RegisterViewModel registerViewModel;
     private String email;
     private String correctOtpCode;
     static boolean isActivityRunning = false;
     private int clickCount = 0;
     private String previousActivity;
-    private User user;
+    private String name;
+    private String password;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_authentication);
 
         otpViewModel = ViewModelProviders.of(this).get(OtpViewModel.class);
+        registerViewModel = ViewModelProviders.of(this).get(RegisterViewModel.class);
 
         binding.proceed.setOnClickListener(this);
         binding.reSend.setOnClickListener(this);
@@ -47,9 +53,11 @@ public class AuthenticationActivity extends AppCompatActivity implements View.On
         TextView authentication = findViewById(R.id.authentication);
         authentication.setText(R.string.description2);
         if(previousActivity.equals("SignUpActivity")){
-            user = (User)intent.getSerializableExtra("User");
+            name = intent.getStringExtra("name");
+            password = intent.getStringExtra("password");
             generateOtp(email);
         }
+
     }
 
     @Override
@@ -88,6 +96,36 @@ public class AuthenticationActivity extends AppCompatActivity implements View.On
         });
     }
 
+    private void goToProductActivity() {
+        Intent intent = new Intent(this, ProductActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
+        finish();
+    }
+
+    private void createAccount(){
+
+        ProgressDialog progressDialog = new ProgressDialog(this, R.style.AppTheme_Dialog);
+        progressDialog.setMessage(getString(R.string.create_account));
+        progressDialog.setCancelable(false);
+        progressDialog.show();
+
+        registerViewModel.getRegisterResponseLiveData(new User(name, email, password)).observe((LifecycleOwner) this, registerApiResponse -> {
+            if (!registerApiResponse.isError()) {
+//                Toast.makeText(this, registerApiResponse.getMessage(), Toast.LENGTH_LONG).show();
+                LoginUtils.getInstance(this).saveUserInfo(registerApiResponse.getUser());
+                progressDialog.dismiss();
+                goToProductActivity();
+
+            }else {
+                progressDialog.cancel();
+                Toast.makeText(this, registerApiResponse.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+
+
+    }
+
     private void checkOtpCode() {
         String otpEntered = binding.otpCode.getText().toString();
 
@@ -96,14 +134,11 @@ public class AuthenticationActivity extends AppCompatActivity implements View.On
             binding.otpCode.setError(getString(R.string.incorrect_code));
             binding.otpCode.requestFocus();
         } else if(previousActivity.equals("SignUpActivity")){
-            LoginUtils.getInstance(this).saveUserInfo(user);
-            Intent intent = new Intent(this, ProductActivity.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-            startActivity(intent);
-            finish();
+            createAccount();
         }
         else if(previousActivity.equals("PasswordAssistant")){
             Intent passwordIntent = new Intent(this, com.example.beckart.view.PasswordActivity.class);
+            passwordIntent.putExtras(getIntent());
             startActivity(passwordIntent);
         }
 

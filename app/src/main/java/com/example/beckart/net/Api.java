@@ -2,12 +2,13 @@ package com.example.beckart.net;
 
 import com.example.beckart.model.Cart;
 import com.example.beckart.model.CartApiResponse;
+import com.example.beckart.model.CustomerOrderApiResponse;
 import com.example.beckart.model.Favorite;
 import com.example.beckart.model.FavoriteApiResponse;
 import com.example.beckart.model.Image;
 import com.example.beckart.model.LoginApiResponse;
 import com.example.beckart.model.NewsFeedResponse;
-import com.example.beckart.model.OrderApiResponse;
+import com.example.beckart.model.Order;
 import com.example.beckart.model.Ordering;
 import com.example.beckart.model.Otp;
 import com.example.beckart.model.ProductApiResponse;
@@ -15,6 +16,7 @@ import com.example.beckart.model.RegisterApiResponse;
 import com.example.beckart.model.Review;
 import com.example.beckart.model.ReviewApiResponse;
 import com.example.beckart.model.Shipping;
+import com.example.beckart.model.StatusApiResponse;
 import com.example.beckart.model.User;
 import java.util.Map;
 import okhttp3.MultipartBody;
@@ -53,8 +55,9 @@ public interface Api {
     @PUT("users/upload")
     Call<ResponseBody> uploadPhoto(@Part MultipartBody.Part userPhoto, @Part("id") RequestBody userId);
 
-    @PUT("users/info")
-    Call<ResponseBody> updatePassword(@Query("password") String password, @Query("id") int userId);
+    @FormUrlEncoded
+    @POST("android/api/updatePassword.php")
+    Call<ResponseBody> updatePassword(@Field("password") String password, @Field("userId") int userId);
 
     @Multipart
     @POST("android/api/insertProduct.php")
@@ -70,15 +73,21 @@ public interface Api {
 //    @GET("products")
 //    Call<ProductApiResponse> getProducts(@Query("page") int page);
 
+    @Headers("Cache-control:no-cache")
     @GET("android/api/getProductsByCategory.php")
     Call<ProductApiResponse> getProductsByCategory(@Query("category") String category, @Query("userId") int userId,@Query("page") int page);
 
+    @Headers("Cache-control:no-cache")
     @GET("android/api/searchForProduct.php")
     Call<ProductApiResponse> searchForProduct(@Query("q") String keyword, @Query("userId") int userId);
 
     @Headers("Content-Type: application/json")
     @POST("android/api/addFavorite.php")
     Call<ResponseBody> addFavorite(@Body Favorite favorite);
+
+    @Headers("Content-Type: application/json")
+    @POST("android/api/addOrder.php")
+    Call<ResponseBody> addOrder(@Body Order order);
 
     @FormUrlEncoded
     @POST("android/api/removeFavorite.php")
@@ -111,12 +120,25 @@ public interface Api {
     @GET("posters")
     Call<NewsFeedResponse> getPosters();
 
-    @GET("orders/get")
-    Call<OrderApiResponse> getOrders(@Query("userId") int userId);
+    @Headers("Cache-control:no-cache")
+    @GET("android/api/getOrders.php")
+    Call<CustomerOrderApiResponse> getOrders(@Query("userId") int userId,@Query("track") boolean track);
 
     @POST("android/api/addShippingAddress.php")
     Call<ResponseBody> addShippingAddress(@Body Shipping shipping);
 
     @POST("android/api/orderProduct.php")
     Call<ResponseBody> orderProduct(@Body Ordering ordering);
+
+    @Headers("Cache-control:no-cache")
+    @GET("android/api/isEmailExist.php")
+    Call<Otp> isEmailExist(@Query("email") String email);
+
+    @Headers("Cache-control:no-cache")
+    @GET("android/api/isAccountExist.php")
+    Call<Otp> isAccountExist(@Query("email") String email);
+
+    @Headers("Cache-control:no-cache")
+    @GET("android/api/getProductsOfOrder.php")
+    Call<StatusApiResponse> getProductsOfOrder(@Query("orderNumber") String orderNumber);
 }

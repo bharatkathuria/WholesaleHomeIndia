@@ -5,16 +5,16 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
-public class OrderApiResponse {
+public class CustomerOrderApiResponse {
 
     @SerializedName("orders")
-    private List<Order> orderList;
+    private List<CustomerOrder> orderList;
 
-    public List<Order> getOrderList() {
+    public List<CustomerOrder> getOrderList() {
         return orderList;
     }
 
-    public void setOrderList(List<Order> orderList) {
+    public void setOrderList(List<CustomerOrder> orderList) {
         this.orderList = orderList;
     }
 }

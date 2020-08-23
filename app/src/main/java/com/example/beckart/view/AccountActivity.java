@@ -13,6 +13,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -89,6 +90,7 @@ public class AccountActivity extends AppCompatActivity implements View.OnClickLi
         switch (view.getId()) {
             case R.id.myOrders:
                 Intent ordersIntent = new Intent(this, com.example.beckart.view.OrdersActivity.class);
+                ordersIntent.putExtra("track",false);
                 startActivity(ordersIntent);
                 break;
             case R.id.myWishList:
@@ -107,6 +109,7 @@ public class AccountActivity extends AppCompatActivity implements View.OnClickLi
                 break;
             case R.id.changePassword:
                 Intent passwordIntent = new Intent(this, com.example.beckart.view.PasswordActivity.class);
+                passwordIntent.putExtra("activity","accountActivity");
                 startActivity(passwordIntent);
                 break;
         }

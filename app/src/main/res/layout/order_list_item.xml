@@ -2,35 +2,25 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
 
     <LinearLayout
+        android:weightSum="5"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingTop="@dimen/dimen10dp"
         android:paddingBottom="@dimen/dimen15dp"
         android:orientation="horizontal">
 
-        <TextView
-            android:id="@+id/productPrice"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="start|center"
-            android:paddingStart="@dimen/dimen10dp"
-            android:paddingEnd="@dimen/dimen10dp"
-            android:text="@string/_5399_egp"
-            android:textColor="@color/black"
-            android:textSize="@dimen/dimen18sp" />
 
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:layout_weight="4"
             android:orientation="vertical">
 
             <TextView
                 android:id="@+id/orderNumber"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="end"
+                android:gravity="start"
                 android:paddingStart="@dimen/dimen10dp"
                 android:paddingEnd="@dimen/dimen10dp"
                 android:text="@string/order_number"
@@ -41,12 +31,26 @@
                 android:id="@+id/orderDate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="end"
+                android:gravity="start"
                 android:paddingStart="@dimen/dimen10dp"
                 android:paddingEnd="@dimen/dimen10dp"
                 android:text="@string/order_date"
                 android:textColor="@color/vDarkGray"
                 android:textSize="@dimen/dimen18sp" />
         </LinearLayout>
+
+        <TextView
+            android:id="@+id/orderAmount"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:layout_gravity="end|right"
+            android:gravity="right"
+            android:paddingStart="@dimen/dimen10dp"
+            android:paddingEnd="@dimen/dimen10dp"
+            android:text="@string/_5399_egp"
+            android:textColor="@color/black"
+            android:textSize="@dimen/dimen18sp" />
+
     </LinearLayout>
 </layout>

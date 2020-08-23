@@ -21,4 +21,12 @@ public class OtpViewModel extends AndroidViewModel {
     public LiveData<Otp> getOtpCode(String email) {
         return otpRepository.getOtpCode(email);
     }
+
+    public LiveData<Otp> isEmailExist(String userEmail) {
+        return otpRepository.isEmailExist(userEmail);
+    }
+
+    public LiveData<Otp> isAccountExist(String email) {
+        return otpRepository.isAccountExist(email);
+    }
 }

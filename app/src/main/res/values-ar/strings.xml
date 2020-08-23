@@ -183,6 +183,9 @@
     <string name="itemCount">Total Products:</string>
     <string name="country_required">Country Required</string>
     <string name="enter_a_valid_zip">Enter Valid Zip No</string>
+    <string name="delivery_status">Delivery Status:</string>
+    <string name="payment_status">Payment Status:</string>
+    <string name="account_already_exist">Account Already Exist..</string>
 
     <string-array name="categories_array">
         <item>Mobile</item>

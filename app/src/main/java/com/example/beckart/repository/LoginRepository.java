@@ -25,7 +25,6 @@ public class LoginRepository {
 
     public LiveData<LoginApiResponse> getLoginResponseData(String email, String password) {
 
-        Log.d(TAG, "onResponse: starting llll");
         final MutableLiveData<LoginApiResponse> mutableLiveData = new MutableLiveData<>();
         RetrofitClient.getInstance().getApi().logInUser(email, password).enqueue(new Callback<LoginApiResponse>() {
             @Override

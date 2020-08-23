@@ -2,6 +2,7 @@ package com.example.beckart.view;
 
 import android.arch.lifecycle.LifecycleOwner;
 import android.arch.lifecycle.ViewModelProviders;
+import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
@@ -25,7 +26,9 @@ public class PasswordActivity extends AppCompatActivity implements View.OnClickL
     private static final String TAG = "PasswordActivity";
     private ActivityPasswordBinding binding;
     private PasswordViewModel passwordViewModel;
-
+    private String previousActivity;
+    private Intent intent;
+    private int userId;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,8 +37,9 @@ public class PasswordActivity extends AppCompatActivity implements View.OnClickL
 
         ActionBar actionBar = getSupportActionBar();
         actionBar.setTitle(getResources().getString(R.string.change_password));
-
+        intent = getIntent();
         passwordViewModel = ViewModelProviders.of(this).get(PasswordViewModel.class);
+        previousActivity = intent.getStringExtra("activity");
 
         binding.saveChanges.setOnClickListener(this);
         binding.cancel.setOnClickListener(this);
@@ -58,17 +62,25 @@ public class PasswordActivity extends AppCompatActivity implements View.OnClickL
     }
 
     private void updatePassword() {
-        int userId = LoginUtils.getInstance(this).getUserInfo().getId();
-        String oldPassword = LoginUtils.getInstance(this).getUserInfo().getPassword();
+
         String currentPassword = binding.currentPassword.getText().toString();
         String newPassword = binding.newPassword.getText().toString();
         String retypePassword =binding.retypePassword.getText().toString();
 
-        if(!currentPassword.equals(oldPassword)){
-            binding.currentPassword.setError(getString(R.string.enter_current_password));
-            binding.currentPassword.requestFocus();
-            return;
+        if(previousActivity.equals("PasswordAssistant")){
+            userId = intent.getIntExtra("userId",0);
         }
+        else{
+            userId = LoginUtils.getInstance(this).getUserInfo().getId();
+            String oldPassword = LoginUtils.getInstance(this).getUserInfo().getPassword();
+            if(!currentPassword.equals(oldPassword)){
+                binding.currentPassword.setError(getString(R.string.enter_current_password));
+                binding.currentPassword.requestFocus();
+                return;
+            }
+        }
+
+
 
         if (!Validation.isValidPassword(newPassword)) {
             binding.newPassword.setError(getString(R.string.password__at_least_8_characters));
@@ -84,6 +96,7 @@ public class PasswordActivity extends AppCompatActivity implements View.OnClickL
 
         passwordViewModel.updatePassword(newPassword, userId).observe((LifecycleOwner) this, responseBody -> {
             try {
+                LoginUtils.getInstance(this).updatePassword(newPassword);
                 Toast.makeText(PasswordActivity.this, responseBody.string(), Toast.LENGTH_SHORT).show();
             } catch (IOException e) {
                 e.printStackTrace();

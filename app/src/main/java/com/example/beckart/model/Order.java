@@ -6,62 +6,70 @@ import java.io.Serializable;
 
 public class Order implements Serializable {
 
-    @SerializedName("id")
-    private int productId;
-    @SerializedName("product_name")
-    private String productName;
-    @SerializedName("order_number")
+    @SerializedName("orderNumber")
     private String orderNumber;
-    @SerializedName("order_date")
-    private String orderDate;
-    @SerializedName("price")
-    private double productPrice;
-    @SerializedName("status")
-    private String orderDateStatus;
-    @SerializedName("name")
-    private String userName;
-    @SerializedName("address")
+    @SerializedName("orderData")
+    private String orderData;
+    @SerializedName("totalQuantity")
+    private int totalQuantity;
+    @SerializedName("orderAmount")
+    private Float orderAmount;
+    @SerializedName("shippingAmount")
+    private Float shippingAmount;
+    @SerializedName("totalAmount")
+    private Float totalAmount;
+    @SerializedName("shippingAddress")
     private String shippingAddress;
-    @SerializedName("phone")
-    private String shippingPhone;
-
-    public Order(){}
-
-    public int getProductId() {
-        return productId;
-    }
-
-    public double getProductPrice() {
-        return productPrice;
-    }
+    @SerializedName("userId")
+    private int userId;
+    @SerializedName("userEmail")
+    private String userEmail;
 
     public String getOrderNumber() {
         return orderNumber;
     }
 
-    public String getOrderDate() {
-        return orderDate;
+    public String getOrderData() {
+        return orderData;
     }
 
-
-    public String getProductName() {
-        return productName;
+    public int getTotalQuantity() {
+        return totalQuantity;
     }
 
-    public String getOrderDateStatus() {
-        return orderDateStatus;
+    public Float getOrderAmount() {
+        return orderAmount;
     }
 
-    public String getUserName() {
-        return userName;
+    public Float getShippingAmount() {
+        return shippingAmount;
+    }
+
+    public Float getTotalAmount() {
+        return totalAmount;
     }
 
     public String getShippingAddress() {
         return shippingAddress;
     }
 
-    public String getShippingPhone() {
-        return shippingPhone;
+    public int getUserId() {
+        return userId;
     }
 
+    public String getUserEmail() {
+        return userEmail;
+    }
+
+    public Order(String orderNumber, String orderData, int totalQuantity, Float orderAmount, Float shippingAmount, Float totalAmount, String shippingAddress, int userId, String userEmail) {
+        this.orderNumber = orderNumber;
+        this.orderData = orderData;
+        this.totalQuantity = totalQuantity;
+        this.orderAmount = orderAmount;
+        this.shippingAmount = shippingAmount;
+        this.totalAmount = totalAmount;
+        this.shippingAddress = shippingAddress;
+        this.userId = userId;
+        this.userEmail = userEmail;
+    }
 }

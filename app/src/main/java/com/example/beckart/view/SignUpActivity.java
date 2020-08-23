@@ -14,6 +14,7 @@ import android.text.style.StyleSpan;
 import android.view.View;
 import android.widget.Toast;
 import com.example.beckart.R;
+import com.example.beckart.ViewModel.OtpViewModel;
 import com.example.beckart.ViewModel.RegisterViewModel;
 import com.example.beckart.databinding.ActivitySignupBinding;
 import com.example.beckart.model.User;
@@ -30,19 +31,20 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
 
     private static final String TAG = "SignUpActivity";
     private ActivitySignupBinding binding;
-    private RegisterViewModel registerViewModel;
-
+    private OtpViewModel otpViewModel;
+    private String name;
+    private String email;
+    private String password;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         loadLocale(this);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_signup);
+        otpViewModel = ViewModelProviders.of(this).get(OtpViewModel.class);
 
         binding.buttonSignUp.setOnClickListener(this);
         binding.textViewLogin.setOnClickListener(this);
-
-        registerViewModel = ViewModelProviders.of(this).get(RegisterViewModel.class);
 
         setBoldStyle();
     }
@@ -56,9 +58,9 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
     }
 
     private void signUpUser() {
-        String name = binding.userName.getText().toString();
-        String email = binding.userEmail.getText().toString();
-        String password = binding.userPassword.getText().toString();
+        name = binding.userName.getText().toString();
+        email = binding.userEmail.getText().toString();
+        password = binding.userPassword.getText().toString();
 
         if (name.isEmpty()) {
             binding.userName.setError(getString(R.string.name_required));
@@ -95,23 +97,16 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
             return;
         }
 
-        ProgressDialog progressDialog = new ProgressDialog(this, R.style.AppTheme_Dialog);
-        progressDialog.setMessage(getString(R.string.create_account));
-        progressDialog.setCancelable(false);
-        progressDialog.show();
 
-        registerViewModel.getRegisterResponseLiveData(new User(name, email, password)).observe((LifecycleOwner) this, registerApiResponse -> {
-            if (!registerApiResponse.isError()) {
-//                Toast.makeText(this, registerApiResponse.getMessage(), Toast.LENGTH_LONG).show();
-//                LoginUtils.getInstance(this).saveUserInfo(registerApiResponse.getUser());
-                progressDialog.dismiss();
-                goToAuthenticationActivity(email,registerApiResponse.getUser());
-            }else {
-                progressDialog.cancel();
-                Toast.makeText(this, registerApiResponse.getMessage(), Toast.LENGTH_SHORT).show();
-            }
-        });
-
+        otpViewModel.isAccountExist(email).observe((LifecycleOwner) this, responseBody -> {
+                if (!responseBody.isError()) {
+                    goToAuthenticationActivity(email);
+                } else {
+                    binding.userEmail.setError(responseBody.getMessage());
+                    binding.userEmail.requestFocus();
+                    return;
+                }
+            });
     }
 
 
@@ -138,12 +133,14 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         startActivity(intent);
         finish();
     }
-    private void goToAuthenticationActivity(String email,User user) {
+
+    private void goToAuthenticationActivity(String email) {
         Intent intent = new Intent(this, AuthenticationActivity.class);
         intent.putExtra(EMAIL, email);
         intent.putExtra(OTP, "1233333");
-        intent.putExtra("User", user);
         intent.putExtra("activity","SignUpActivity");
+        intent.putExtra("name",name);
+        intent.putExtra("password",password);
         startActivity(intent);
     }
 

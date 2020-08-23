@@ -340,6 +340,7 @@ public class ProductActivity extends AppCompatActivity implements View.OnClickLi
         }
         else if (id == R.id.nav_trackOrder) {
             Intent orderIntent = new Intent(this, OrdersActivity.class);
+            orderIntent.putExtra("track",true);
             startActivity(orderIntent);
         } else if (id == R.id.nav_myAccount) {
             Intent accountIntent = new Intent(this, AccountActivity.class);

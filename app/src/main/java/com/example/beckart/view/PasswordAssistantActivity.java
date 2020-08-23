@@ -16,11 +16,12 @@ import static com.example.beckart.utils.Constant.OTP;
 
 public class PasswordAssistantActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private static final String TAG = "PasswordAssistantActivi";
+    private static final String TAG = "PasswordAssistantActivity";
     private ActivityPasswordAssistantBinding binding;
     private OtpViewModel otpViewModel;
     private String userEmail;
     private String otpCode;
+    private int userId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,11 +41,16 @@ public class PasswordAssistantActivity extends AppCompatActivity implements View
     }
 
     private void checkUserEmail() {
-        String emailEntered = binding.emailAddress.getText().toString();
+        userEmail = binding.emailAddress.getText().toString();
+        if(userEmail.isEmpty()){
+            binding.emailAddress.setError(getString(R.string.enter_a_valid_email_address));
+            binding.emailAddress.requestFocus();
+            return;
+        }
 
-        otpViewModel.getOtpCode(emailEntered).observe((LifecycleOwner) this, responseBody -> {
+        otpViewModel.isEmailExist(userEmail).observe((LifecycleOwner) this, responseBody -> {
             if (!responseBody.isError()) {
-                userEmail = responseBody.getEmail();
+                userId = responseBody.getUserId();
                 otpCode = responseBody.getOtp();
                 goToAuthenticationActivity();
             } else {
@@ -57,6 +63,7 @@ public class PasswordAssistantActivity extends AppCompatActivity implements View
         Intent intent = new Intent(this, AuthenticationActivity.class);
         intent.putExtra(EMAIL, userEmail);
         intent.putExtra(OTP, otpCode);
+        intent.putExtra("userId", userId);
         intent.putExtra("activity","PasswordAssistant");
         startActivity(intent);
     }

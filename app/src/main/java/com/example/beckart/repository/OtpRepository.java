@@ -21,6 +21,27 @@ public class OtpRepository {
         this.application = application;
     }
 
+    public LiveData<Otp> isEmailExist(String email) {
+        final MutableLiveData<Otp> mutableLiveData = new MutableLiveData<>();
+        RetrofitClient.getInstance().getApi().isEmailExist(email).enqueue(new Callback<Otp>() {
+            @Override
+            public void onResponse(Call<Otp> call, Response<Otp> response) {
+
+                Log.d(TAG, "onResponse: Succeeded");
+                Log.d(TAG, String.valueOf(response));
+                mutableLiveData.setValue(response.body());
+
+            }
+
+            @Override
+            public void onFailure(Call<Otp> call, Throwable t) {
+                Log.d(TAG, "onFailure: " + t.getMessage());
+            }
+        });
+
+        return mutableLiveData;
+    }
+
     public LiveData<Otp> getOtpCode(String email) {
         final MutableLiveData<Otp> mutableLiveData = new MutableLiveData<>();
 
@@ -42,4 +63,28 @@ public class OtpRepository {
 
         return mutableLiveData;
     }
+
+    public LiveData<Otp> isAccountExist(String email) {
+
+        final MutableLiveData<Otp> mutableLiveData = new MutableLiveData<>();
+
+        RetrofitClient.getInstance().getApi().isAccountExist(email).enqueue(new Callback<Otp>() {
+            @Override
+            public void onResponse(Call<Otp> call, Response<Otp> response) {
+
+                Log.d(TAG, "onResponse: Succeeded");
+                Log.d(TAG, String.valueOf(response));
+                mutableLiveData.setValue(response.body());
+
+            }
+
+            @Override
+            public void onFailure(Call<Otp> call, Throwable t) {
+                Log.d(TAG, "onFailure: " + t.getMessage());
+            }
+        });
+
+        return mutableLiveData;
+    }
+
 }

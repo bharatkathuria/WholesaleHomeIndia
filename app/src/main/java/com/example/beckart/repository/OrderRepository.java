@@ -7,7 +7,7 @@ import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MutableLiveData;
 import android.util.Log;
 
-import com.example.beckart.model.OrderApiResponse;
+import com.example.beckart.model.CustomerOrderApiResponse;
 import com.example.beckart.net.RetrofitClient;
 
 import retrofit2.Call;
@@ -23,14 +23,14 @@ public class OrderRepository {
         this.application = application;
     }
 
-    public LiveData<OrderApiResponse> getOrders(int userId) {
-        final MutableLiveData<OrderApiResponse> mutableLiveData = new MutableLiveData<>();
-        RetrofitClient.getInstance().getApi().getOrders(userId).enqueue(new Callback<OrderApiResponse>() {
+    public LiveData<CustomerOrderApiResponse> getOrders(int userId,boolean track) {
+        final MutableLiveData<CustomerOrderApiResponse> mutableLiveData = new MutableLiveData<>();
+        RetrofitClient.getInstance().getApi().getOrders(userId,track).enqueue(new Callback<CustomerOrderApiResponse>() {
             @Override
-            public void onResponse(Call<OrderApiResponse> call, Response<OrderApiResponse> response) {
+            public void onResponse(Call<CustomerOrderApiResponse> call, Response<CustomerOrderApiResponse> response) {
                 Log.d("onResponse", "" + response.code());
 
-                OrderApiResponse responseBody = response.body();
+                CustomerOrderApiResponse responseBody = response.body();
 
                 if (response.body() != null) {
                     mutableLiveData.setValue(responseBody);
@@ -38,7 +38,7 @@ public class OrderRepository {
             }
 
             @Override
-            public void onFailure(Call<OrderApiResponse> call, Throwable t) {
+            public void onFailure(Call<CustomerOrderApiResponse> call, Throwable t) {
                 Log.d(TAG, "onFailure: " + t.getMessage());
             }
         });

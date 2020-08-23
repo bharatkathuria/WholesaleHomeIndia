@@ -73,4 +73,10 @@ public class LoginUtils {
         editor.apply();
     }
 
+    public void updatePassword(String password) {
+        SharedPreferences sharedPreferences = mCtx.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("password", password);
+        editor.apply();
+    }
 }

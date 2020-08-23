@@ -14,6 +14,8 @@ public class Product implements Parcelable {
     @SerializedName("price")
     private double productPrice;
     @SerializedName("quantity")
+    private int orderQuantity;
+    @SerializedName("product_quantity")
     private int productQuantity;
     @SerializedName("supplier")
     private String productSupplier;
@@ -25,15 +27,28 @@ public class Product implements Parcelable {
     private int isFavourite;
     @SerializedName("isInCart")
     private int isInCart;
+    @SerializedName("description")
+    private String description;
     // Include child Parcelable objects
     private Product mInfo;
 
-    public Product(String productName, double productPrice, int productQuantity, String productSupplier, String productCategory) {
+    public Product(String productName, double productPrice, int productQuantity, String productSupplier, String productCategory,String description) {
         this.productName = productName;
         this.productPrice = productPrice;
         this.productQuantity = productQuantity;
         this.productSupplier = productSupplier;
         this.productCategory = productCategory;
+        this.description = description;
+    }
+
+    public Product(String productName, double productPrice, int productQuantity, String productSupplier, String productCategory,String description,int orderQuantity) {
+        this.productName = productName;
+        this.productPrice = productPrice;
+        this.productQuantity = productQuantity;
+        this.productSupplier = productSupplier;
+        this.productCategory = productCategory;
+        this.description = description;
+        this.orderQuantity = orderQuantity;
     }
 
     public Product() {
@@ -57,6 +72,10 @@ public class Product implements Parcelable {
         return productQuantity;
     }
 
+    public int getOrderQuantity() {
+        return orderQuantity;
+    }
+
     public String getProductSupplier() {
         return productSupplier;
     }
@@ -69,6 +88,9 @@ public class Product implements Parcelable {
         return  "android"+productImage.substring(2);
     }
 
+    public String getDescription() {
+        return description;
+    }
 
     public int isFavourite() {
         return isFavourite;
@@ -91,6 +113,7 @@ public class Product implements Parcelable {
     public void writeToParcel(Parcel out, int flags) {
         out.writeInt(productId);
         out.writeString(productName);
+        out.writeString(description);
         out.writeDouble(productPrice);
         out.writeInt(productQuantity);
         out.writeString(productSupplier);
@@ -105,6 +128,7 @@ public class Product implements Parcelable {
     private Product(Parcel in) {
         productId = in.readInt();
         productName = in.readString();
+        description = in.readString();
         productPrice = in.readDouble();
         productQuantity = in.readInt();
         productSupplier = in.readString();
