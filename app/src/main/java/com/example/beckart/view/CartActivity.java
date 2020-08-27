@@ -11,8 +11,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
-import android.widget.Toast;
 
 import com.example.beckart.R;
 import com.example.beckart.ViewModel.CartViewModel;
@@ -24,7 +22,6 @@ import com.example.beckart.storage.LoginUtils;
 
 import java.util.List;
 
-import static com.example.beckart.storage.LanguageUtils.loadLocale;
 import static com.example.beckart.utils.Constant.PRODUCT;
 import static com.example.beckart.utils.InternetUtils.isNetworkConnected;
 
@@ -38,7 +35,6 @@ public class CartActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        loadLocale(this);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_cart);
 
         ActionBar actionBar = getSupportActionBar();

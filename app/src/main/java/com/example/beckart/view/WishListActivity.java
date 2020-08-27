@@ -18,7 +18,6 @@ import com.example.beckart.storage.LoginUtils;
 
 import java.util.List;
 
-import static com.example.beckart.storage.LanguageUtils.loadLocale;
 import static com.example.beckart.utils.Constant.PRODUCT;
 import static com.example.beckart.utils.InternetUtils.isNetworkConnected;
 
@@ -32,7 +31,6 @@ public class WishListActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        loadLocale(this);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_wishlist);
 
         ActionBar actionBar = getSupportActionBar();

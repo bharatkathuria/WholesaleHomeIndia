@@ -18,7 +18,6 @@ import com.example.beckart.utils.Validation;
 
 import java.io.IOException;
 
-import static com.example.beckart.storage.LanguageUtils.loadLocale;
 import static com.example.beckart.view.AuthenticationActivity.isActivityRunning;
 
 public class PasswordActivity extends AppCompatActivity implements View.OnClickListener{
@@ -32,7 +31,6 @@ public class PasswordActivity extends AppCompatActivity implements View.OnClickL
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        loadLocale(this);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_password);
 
         ActionBar actionBar = getSupportActionBar();

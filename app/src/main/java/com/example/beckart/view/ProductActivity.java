@@ -40,7 +40,6 @@ import com.example.beckart.utils.Slide;
 
 import java.util.ArrayList;
 
-import static com.example.beckart.storage.LanguageUtils.loadLocale;
 import static com.example.beckart.utils.Constant.CATEGORY;
 import static com.example.beckart.utils.Constant.PRODUCT;
 import static com.example.beckart.utils.InternetUtils.isNetworkConnected;
@@ -51,10 +50,9 @@ public class ProductActivity extends AppCompatActivity implements View.OnClickLi
     private static final String TAG = "ProductActivity";
     private ActivityProductBinding binding;
 
-    private ProductAdapter mobileAdapter;
-    private ProductAdapter laptopAdapter;
+    private ProductAdapter cutleryAdapter;
+    private ProductAdapter cookwareAdapter;
     private ProductAdapter cookerAdapter;
-    private ProductAdapter historyAdapter;
 
     private ProductViewModel productViewModel;
 
@@ -67,30 +65,30 @@ public class ProductActivity extends AppCompatActivity implements View.OnClickLi
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        loadLocale(this);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_product);
 
         int userID = LoginUtils.getInstance(this).getUserInfo().getId();
 
         productViewModel = ViewModelProviders.of(this).get(ProductViewModel.class);
-        productViewModel.loadLaptops("cookware",userID);
-        productViewModel.loadMobiles("cutlery", userID);
+        productViewModel.loadCookware("cookware",userID);
+        productViewModel.loadCutlery("cutlery", userID);
         productViewModel.loadCookers("pressure cooker",userID);
 
 
         snack = Snackbar.make(findViewById(android.R.id.content), getResources().getString(R.string.no_internet_connection), Snackbar.LENGTH_INDEFINITE);
 
-        binding.included.content.txtSeeAllMobiles.setOnClickListener(this);
-        binding.included.content.txtSeeAllLaptops.setOnClickListener(this);
+        binding.included.content.txtSeeAllCutlery.setOnClickListener(this);
+        binding.included.content.txtSeeAllCookware.setOnClickListener(this);
         binding.included.content.txtSeeAllCookers.setOnClickListener(this);
 
         binding.included.txtSearch.setOnClickListener(this);
 
         setUpViews();
 
-        getMobiles();
-        getLaptops();
+        getCutlery();
+        getCookware();
         getCookers();
+
         flipImages(Slide.getSlides());
 
         mNetworkReceiver = new NetworkChangeReceiver();
@@ -117,52 +115,52 @@ public class ProductActivity extends AppCompatActivity implements View.OnClickLi
         TextView userEmail = headerContainer.findViewById(R.id.emailOfUser);
         userEmail.setText(LoginUtils.getInstance(this).getUserInfo().getEmail());
 
-        binding.included.content.listOfMobiles.setHasFixedSize(true);
-        binding.included.content.listOfMobiles.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
-        binding.included.content.listOfMobiles.setItemAnimator(null);
+        binding.included.content.listOfCutlery.setHasFixedSize(true);
+        binding.included.content.listOfCutlery.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
+        binding.included.content.listOfCutlery.setItemAnimator(null);
 
-        binding.included.content.listOfLaptops.setHasFixedSize(true);
-        binding.included.content.listOfLaptops.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
-        binding.included.content.listOfLaptops.setItemAnimator(null);
+        binding.included.content.listOfCookware.setHasFixedSize(true);
+        binding.included.content.listOfCookware.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
+        binding.included.content.listOfCookware.setItemAnimator(null);
 
         binding.included.content.listOfCookers.setHasFixedSize(true);
         binding.included.content.listOfCookers.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
         binding.included.content.listOfCookers.setItemAnimator(null);
 
-        mobileAdapter = new ProductAdapter(this, this);
-        laptopAdapter = new ProductAdapter(this, this);
+        cutleryAdapter = new ProductAdapter(this, this);
+        cookwareAdapter = new ProductAdapter(this, this);
         cookerAdapter = new ProductAdapter(this,this);
 
     }
 
-    private void getMobiles() {
+    private void getCutlery() {
         if (isNetworkConnected(this)) {
             productViewModel.productPagedList.observe(this, new Observer<PagedList<Product>>() {
                 @Override
                 public void onChanged(@Nullable PagedList<Product> products) {
-                    mobileAdapter.submitList(products);
+                    cutleryAdapter.submitList(products);
                 }
             });
 
-            binding.included.content.listOfMobiles.setAdapter(mobileAdapter);
-            mobileAdapter.notifyDataSetChanged();
+            binding.included.content.listOfCutlery.setAdapter(cutleryAdapter);
+            cutleryAdapter.notifyDataSetChanged();
         } else {
             showOrHideViews(View.INVISIBLE);
             showSnackBar();
         }
     }
 
-    private void getLaptops() {
+    private void getCookware() {
         if (isNetworkConnected(this)) {
-            productViewModel.laptopPagedList.observe(this, new Observer<PagedList<Product>>() {
+            productViewModel.cookwarePagedList.observe(this, new Observer<PagedList<Product>>() {
                 @Override
                 public void onChanged(@Nullable PagedList<Product> products) {
-                    laptopAdapter.submitList(products);
+                    cookwareAdapter.submitList(products);
                 }
             });
 
-            binding.included.content.listOfLaptops.setAdapter(laptopAdapter);
-            laptopAdapter.notifyDataSetChanged();
+            binding.included.content.listOfCookware.setAdapter(cookwareAdapter);
+            cookwareAdapter.notifyDataSetChanged();
         } else {
             showOrHideViews(View.INVISIBLE);
             showSnackBar();
@@ -206,14 +204,14 @@ public class ProductActivity extends AppCompatActivity implements View.OnClickLi
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.txtSeeAllMobiles:
-                Intent mobileIntent = new Intent(this, AllMobilesActivity.class);
-                startActivity(mobileIntent);
+            case R.id.txtSeeAllCutlery:
+                Intent cutleryIntent = new Intent(this, AllCutleryActivity.class);
+                startActivity(cutleryIntent);
 
                 break;
-            case R.id.txtSeeAllLaptops:
-                Intent laptopIntent = new Intent(this, AllLaptopsActivity.class);
-                startActivity(laptopIntent);
+            case R.id.txtSeeAllCookware:
+                Intent cookwareIntent = new Intent(this, AllCookwareActivity.class);
+                startActivity(cookwareIntent);
                 break;
             case R.id.txtSeeAllCookers:
                 Intent cookerIntent = new Intent(this, AllCookersActivity.class);
@@ -270,8 +268,8 @@ public class ProductActivity extends AppCompatActivity implements View.OnClickLi
     public void onNetworkConnected() {
         hideSnackBar();
         showOrHideViews(View.VISIBLE);
-        getMobiles();
-        getLaptops();
+        getCutlery();
+        getCookware();
         getCookers();
     }
 
@@ -318,10 +316,10 @@ public class ProductActivity extends AppCompatActivity implements View.OnClickLi
     }
 
     private void showOrHideViews(int view) {
-        binding.included.content.textViewMobiles.setVisibility(view);
-        binding.included.content.txtSeeAllMobiles.setVisibility(view);
-        binding.included.content.textViewLaptops.setVisibility(view);
-        binding.included.content.txtSeeAllLaptops.setVisibility(view);
+        binding.included.content.textViewCutlery.setVisibility(view);
+        binding.included.content.txtSeeAllCutlery.setVisibility(view);
+        binding.included.content.textViewCookware.setVisibility(view);
+        binding.included.content.txtSeeAllCookware.setVisibility(view);
         binding.included.content.textViewCookers.setVisibility(view);
         binding.included.content.txtSeeAllCookers.setVisibility(view);
 
@@ -331,11 +329,11 @@ public class ProductActivity extends AppCompatActivity implements View.OnClickLi
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
         int id = menuItem.getItemId();
 
-        if (id == R.id.nav_mobiles) {
+        if (id == R.id.nav_cookers) {
             goToCategoryActivity("pressure cooker");
-        } else if (id == R.id.nav_laptops) {
+        } else if (id == R.id.nav_cookware) {
             goToCategoryActivity("cookware");
-        } else if (id == R.id.nav_babies) {
+        } else if (id == R.id.nav_cutlery) {
             goToCategoryActivity("cutlery");
         }
         else if (id == R.id.nav_trackOrder) {
@@ -349,7 +347,10 @@ public class ProductActivity extends AppCompatActivity implements View.OnClickLi
             Intent wishListIntent = new Intent(this, com.example.beckart.view.WishListActivity.class);
             startActivity(wishListIntent);
         }
-
+        else if (id == R.id.nav_myCart) {
+            Intent cartIntent = new Intent(this, com.example.beckart.view.CartActivity.class);
+            startActivity(cartIntent);
+        }
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
@@ -388,8 +389,8 @@ public class ProductActivity extends AppCompatActivity implements View.OnClickLi
     protected void onResume() {
         super.onResume();
         productViewModel.invalidate();
-        getMobiles();
-        getLaptops();
+        getCutlery();
+        getCookware();
         getCookers();
     }
 

@@ -50,14 +50,14 @@
         <activity
             android:name=".view.DetailsActivity"
             android:launchMode="singleTop"
-            android:parentActivityName=".view.AllMobilesActivity">
+            android:parentActivityName=".view.AllCookwareActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".view.AllMobilesActivity" />
+                android:value=".view.AllCutleryActivity" />
         </activity>
         <activity
-            android:name=".view.AllLaptopsActivity"
-            android:label="@string/all_laptops"
+            android:name=".view.AllCookwareActivity"
+            android:label="@string/all_cookware"
             android:parentActivityName=".view.ProductActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -72,8 +72,8 @@
                 android:value=".view.ProductActivity" />
         </activity>
         <activity
-            android:name=".view.AllMobilesActivity"
-            android:label="@string/all_mobiles"
+            android:name=".view.AllCutleryActivity"
+            android:label="@string/all_cutlery"
             android:parentActivityName=".view.ProductActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -157,14 +157,6 @@
         <activity
             android:name=".view.AuthenticationActivity"
             android:theme="@style/NoActionBar" />
-        <activity
-            android:name=".view.NewsFeedActivity"
-            android:label="@string/news_feed"
-            android:parentActivityName=".view.ProductActivity">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".view.ProductActivity" />
-        </activity>
         <activity android:name=".view.ShippingAddressActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"

@@ -11,17 +11,17 @@ import android.arch.paging.PageKeyedDataSource;
 import com.example.beckart.model.Product;
 
 
-public class LaptopDataSourceFactory extends DataSource.Factory{
+public class CookwareDataSourceFactory extends DataSource.Factory{
 
     // Creating the mutable live database
-    private MutableLiveData<PageKeyedDataSource<Integer, Product>> laptopLiveDataSource = new MutableLiveData<>();
+    private MutableLiveData<PageKeyedDataSource<Integer, Product>> cookwareLiveDataSource = new MutableLiveData<>();
 
-    public static com.example.beckart.net.ProductDataSource laptopDataSource;
+    public static com.example.beckart.net.ProductDataSource cookwareDataSource;
 
     private String category;
     private int userId;
 
-    public LaptopDataSourceFactory(String category, int userId){
+    public CookwareDataSourceFactory(String category, int userId){
         this.category = category;
         this.userId = userId;
     }
@@ -29,18 +29,18 @@ public class LaptopDataSourceFactory extends DataSource.Factory{
     @Override
     public DataSource<Integer, Product> create() {
         // Getting our Data source object
-        laptopDataSource = new com.example.beckart.net.ProductDataSource(category,userId);
+        cookwareDataSource = new com.example.beckart.net.ProductDataSource(category,userId);
 
         // Posting the Data source to get the values
-        laptopLiveDataSource.postValue(laptopDataSource);
+        cookwareLiveDataSource.postValue(cookwareDataSource);
 
         // Returning the Data source
-        return laptopDataSource;
+        return cookwareDataSource;
     }
 
 
     // Getter for Product live DataSource
-    public MutableLiveData<PageKeyedDataSource<Integer, Product>> getLaptopLiveDataSource() {
-        return laptopLiveDataSource;
+    public MutableLiveData<PageKeyedDataSource<Integer, Product>> getCookwareLiveDataSource() {
+        return cookwareLiveDataSource;
     }
 }

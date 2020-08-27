@@ -24,11 +24,9 @@ import com.example.beckart.R;
 import com.example.beckart.ViewModel.ProductViewModel;
 import com.example.beckart.adapter.ProductAdapter;
 import com.example.beckart.databinding.ActivityAllCookersBinding;
-import com.example.beckart.databinding.ActivityAllLaptopsBinding;
 import com.example.beckart.model.Product;
 import com.example.beckart.storage.LoginUtils;
 
-import static com.example.beckart.storage.LanguageUtils.loadLocale;
 import static com.example.beckart.utils.Constant.PRODUCT;
 
 public class AllCookersActivity extends AppCompatActivity implements ProductAdapter.ProductAdapterOnClickHandler,LifecycleOwner,LifecycleObserver{
@@ -40,11 +38,10 @@ public class AllCookersActivity extends AppCompatActivity implements ProductAdap
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        loadLocale(this);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_all_cookers);
 
         ActionBar actionBar = getSupportActionBar();
-        actionBar.setTitle(getResources().getString(R.string.all_laptops));
+        actionBar.setTitle(getResources().getString(R.string.all_cookers));
 
         int userID = LoginUtils.getInstance(this).getUserInfo().getId();
 

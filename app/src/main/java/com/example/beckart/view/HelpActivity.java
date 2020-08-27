@@ -15,7 +15,6 @@ import com.example.beckart.model.Help;
 
 import java.util.ArrayList;
 
-import static com.example.beckart.storage.LanguageUtils.loadLocale;
 
 public class HelpActivity extends AppCompatActivity {
 
@@ -24,7 +23,6 @@ public class HelpActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        loadLocale(this);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_help);
 
         ActionBar actionBar = getSupportActionBar();

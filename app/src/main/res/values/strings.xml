@@ -36,9 +36,9 @@
     <string name="add_to_favourite">Add to Favourite</string>
     <string name="_5399_egp">1200 Rs/-</string>
     <string name="name_required">Name Required</string>
-    <string name="all_laptops">All Cookware</string>
-    <string name="all_mobiles">All Cutlery</string>
-    <string name="all_cookers" translatable="false">All Pressure Cookers</string>
+    <string name="all_cookware">All Cookware</string>
+    <string name="all_cutlery">All Cutlery</string>
+    <string name="all_cookers">All Pressure Cookers</string>
     <string name="no_internet_connection">No Internet Connection</string>
     <string name="free_shipping">FREE Shipping</string>
     <string name="fulfilled_by_souq">Fulfilled by Wholesale Home India</string>
@@ -46,7 +46,7 @@
     <string name="search_hint">What are you looking for?</string>
     <string name="cart">Cart</string>
     <string name="profile_picture">Profile Picture</string>
-    <string name="marwa_eltayeb_yahoo_com">gupta.rohan286@gmail.com</string>
+    <string name="marwa_eltayeb_yahoo_com">wholesalehomeindia@gmail.com</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
@@ -55,14 +55,15 @@
     <string name="share">Share</string>
     <string name="rate">Rate Us</string>
     <string name="communicate">Communicate</string>
-    <string name="mobiles">Pressure Cookers</string>
-    <string name="laptops">Cookware</string>
-    <string name="babies">Cutlery</string>
+    <string name="cookers">Pressure Cookers</string>
+    <string name="cookware">Cookware</string>
+    <string name="cutlery">Cutlery</string>
     <string name="toys">Toys</string>
     <string name="track_orders">Track Orders</string>
     <string name="my_account">My Account</string>
     <string name="news_feed">News Feed</string>
     <string name="my_wishList">My WishList</string>
+    <string name="my_cart">My Cart</string>
     <string name="marwa_eltayeb">Rohan Gupta</string>
     <string name="take_picture">Take Picture</string>
     <string name="use_gallery">Use Gallery</string>
@@ -140,7 +141,7 @@
     <string name="email_address">Email Address</string>
     <string name="authentication_required">Authentication Required</string>
     <string name="enter_otp">Enter OTP</string>
-    <string name="description2">For your security, we need to authenticate your request. We\'ve sent a code from <b>Wholesale Home India</b> to the email. Please enter it below.</string>
+    <string name="description2">For your security, we need to authenticate your request. We\'ve sent a 6 digit otp code from <b>Wholesale Home India</b> to your email. Please enter it below.</string>
     <string name="enter_your_email">Please Enter your correct email</string>
     <string name="incorrect_code">Incorrect Code</string>
     <string name="resend_otp">Resend OTP</string>
@@ -169,7 +170,7 @@
     <string name="orders">Orders</string>
     <string name="order_n">ORDER N:</string>
     <string name="shipping">Shipping</string>
-    <string name="shipping_details" translatable="false">Shipping Details</string>
+    <string name="shipping_details" >Shipping Details</string>
     <string name="user_address">23 Mohamed Ali St, Sidi Bishr</string>
     <string name="dummy_phone">01034238328</string>
     <string name="items_in_your_order">ITEMS IN YOUR ORDER</string>
@@ -180,16 +181,16 @@
     <string name="schedule">schedule</string>
     <string name="clear_all">Clear all</string>
     <string name="what_are_you_looking_for">What are you looking for?</string>
-    <string name="Rs" translatable="false">\u20B9</string>
-    <string name="incorrect_email" translatable="false">Incorrect Email !</string>
-    <string name="cooker" translatable="false">Pressure Cookers</string>
+    <string name="Rs" >\u20B9</string>
+    <string name="incorrect_email" >Incorrect Email !</string>
+    <string name="cooker" >Pressure Cookers</string>
     <string name="itemCount">Total Products:</string>
-    <string name="total" translatable="false">Total:  </string>
-    <string name="checkout" translatable="false">Checkout</string>
-    <string name="address_required" translatable="false">Address Required</string>
-    <string name="city_required" translatable="false">City Required</string>
+    <string name="total" >Total:  </string>
+    <string name="checkout" >Checkout</string>
+    <string name="address_required" >Address Required</string>
+    <string name="city_required" >City Required</string>
     <string name="country_required">Country Required</string>
-    <string name="enter_a_valid_phoneno" translatable="false">Enter Valid Phone No</string>
+    <string name="enter_a_valid_phoneno" >Enter Valid Phone No</string>
     <string name="enter_a_valid_zip">Enter Valid Zip</string>
     <string name="delivery_status">Delivery Status:</string>
     <string name="payment_status">Payment Status:</string>

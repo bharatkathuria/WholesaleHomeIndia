@@ -12,18 +12,12 @@ import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.style.StyleSpan;
 import android.view.View;
-import android.widget.Toast;
 import com.example.beckart.R;
 import com.example.beckart.ViewModel.OtpViewModel;
-import com.example.beckart.ViewModel.RegisterViewModel;
 import com.example.beckart.databinding.ActivitySignupBinding;
-import com.example.beckart.model.User;
 import com.example.beckart.storage.LoginUtils;
 import com.example.beckart.utils.Validation;
 
-import java.io.Serializable;
-
-import static com.example.beckart.storage.LanguageUtils.loadLocale;
 import static com.example.beckart.utils.Constant.EMAIL;
 import static com.example.beckart.utils.Constant.OTP;
 
@@ -39,7 +33,6 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        loadLocale(this);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_signup);
         otpViewModel = ViewModelProviders.of(this).get(OtpViewModel.class);
 

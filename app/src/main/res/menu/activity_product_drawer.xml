@@ -3,40 +3,47 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:showIn="navigation_view">
 
-    <group android:checkableBehavior="single"
-           android:id="@+id/group1">
+    <group
+        android:id="@+id/group1"
+        android:checkableBehavior="single">
         <item
-            android:id="@+id/nav_mobiles"
+            android:id="@+id/nav_cookers"
             android:icon="@drawable/ic_baseline_outdoor_grill_24"
-            android:title="@string/mobiles" />
+            android:title="@string/cookers" />
         <item
-            android:id="@+id/nav_laptops"
+            android:id="@+id/nav_cookware"
             android:icon="@drawable/ic_baseline_local_grocery_store_24"
-            android:title="@string/laptops" />
+            android:title="@string/cookware" />
 
         <item
-            android:id="@+id/nav_babies"
+            android:id="@+id/nav_cutlery"
             android:icon="@drawable/ic_baseline_kitchen_24"
-            android:title="@string/babies" />
+            android:title="@string/cutlery" />
 
     </group>
 
-    <group android:checkableBehavior="single"
-           android:id="@+id/group2">
-            <item
-                android:id="@+id/nav_trackOrder"
-                android:icon="@drawable/ic_tracking"
-                android:title="@string/track_orders" />
+    <group
+        android:id="@+id/group2"
+        android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_trackOrder"
+            android:icon="@drawable/ic_tracking"
+            android:title="@string/track_orders" />
 
-            <item
-                android:id="@+id/nav_myAccount"
-                android:icon="@drawable/ic_account"
-                android:title="@string/my_account" />
+        <item
+            android:id="@+id/nav_myAccount"
+            android:icon="@drawable/ic_account"
+            android:title="@string/my_account" />
 
-            <item
-                android:id="@+id/nav_wishList"
-                android:icon="@drawable/ic_favorite_border"
-                android:title="@string/my_wishList" />
+        <item
+            android:id="@+id/nav_wishList"
+            android:icon="@drawable/ic_favorite_border"
+            android:title="@string/my_wishList" />
+        <item
+            android:id="@+id/nav_myCart"
+            android:icon="@drawable/ic_shopping_cart_grey"
+            android:title="@string/my_cart" />
+
     </group>
 </menu>
 

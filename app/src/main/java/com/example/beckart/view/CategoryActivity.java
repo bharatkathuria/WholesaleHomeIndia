@@ -13,7 +13,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
@@ -27,7 +26,6 @@ import com.example.beckart.storage.LoginUtils;
 import com.example.beckart.utils.Constant;
 import com.example.beckart.utils.OnNetworkListener;
 
-import static com.example.beckart.storage.LanguageUtils.loadLocale;
 import static com.example.beckart.utils.Constant.PRODUCT;
 import static com.example.beckart.utils.InternetUtils.isNetworkConnected;
 
@@ -44,7 +42,6 @@ public class CategoryActivity extends AppCompatActivity implements ProductAdapte
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        loadLocale(this);
         binding= DataBindingUtil.setContentView(this, R.layout.activity_category);
 
         ActionBar actionBar = getSupportActionBar();
@@ -115,7 +112,7 @@ public class CategoryActivity extends AppCompatActivity implements ProductAdapte
     }
 
     public void showSnackBar() {
-        snack.getView().setBackgroundColor(CategoryActivity.this.getColor(R.color.red));
+        snack.getView().setBackgroundColor(getResources().getColor(R.color.red));
         snack.show();
     }
 

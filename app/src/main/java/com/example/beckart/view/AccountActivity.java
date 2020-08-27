@@ -1,36 +1,22 @@
 package com.example.beckart.view;
 
-import android.app.Dialog;
-//import androidx.lifecycle.ViewModelProviders;
 import android.arch.lifecycle.Lifecycle;
 import android.arch.lifecycle.LifecycleOwner;
 import android.content.Intent;
-//import androidx.databinding.DataBindingUtil;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
-//import androidx.appcompat.app.ActionBar;
-//import androidx.appcompat.app.AppCompatActivity;
 import android.support.annotation.NonNull;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.Window;
-import android.widget.Button;
-import android.widget.Toast;
 
 import com.example.beckart.R;
-//import com.example.beckart.databinding.ActivityAccountBinding;
 import com.example.beckart.databinding.ActivityAccountBinding;
 import com.example.beckart.storage.CartUtils;
 import com.example.beckart.storage.LoginUtils;
 
-import static com.example.beckart.storage.LanguageUtils.getEnglishState;
-import static com.example.beckart.storage.LanguageUtils.loadLocale;
-import static com.example.beckart.storage.LanguageUtils.setEnglishState;
-import static com.example.beckart.storage.LanguageUtils.setLocale;
 import static com.example.beckart.utils.CommunicateUtils.rateAppOnGooglePlay;
 import static com.example.beckart.utils.CommunicateUtils.shareApp;
 
@@ -38,12 +24,10 @@ public class AccountActivity extends AppCompatActivity implements View.OnClickLi
 
     private static final String TAG = "AccountActivity";
 
-    public static boolean historyIsDeleted = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        loadLocale(this);
         ActivityAccountBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_account);
 
         ActionBar actionBar = getSupportActionBar();
@@ -113,59 +97,5 @@ public class AccountActivity extends AppCompatActivity implements View.OnClickLi
                 startActivity(passwordIntent);
                 break;
         }
-    }
-
-
-    private void showCustomAlertDialog() {
-        final Dialog dialog = new Dialog(AccountActivity.this);
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        dialog.setContentView(R.layout.custom_language_dialog);
-
-        Button english = dialog.findViewById(R.id.txtEnglish);
-        Button arabic = dialog.findViewById(R.id.txtArabic);
-
-        if(getEnglishState(this)){
-            english.setEnabled(false);
-            english.setAlpha(.5f);
-            arabic.setEnabled(true);
-        }else {
-            arabic.setEnabled(false);
-            arabic.setAlpha(.5f);
-            english.setEnabled(true);
-        }
-
-        english.setOnClickListener(v -> {
-            english.setEnabled(true);
-            chooseEnglish();
-            dialog.cancel();
-        });
-
-        arabic.setOnClickListener(v -> {
-            arabic.setEnabled(true);
-            chooseArabic();
-            dialog.cancel();
-        });
-
-        dialog.show();
-    }
-
-    private void chooseEnglish() {
-        setLocale(this,"en");
-        recreate();
-        Toast.makeText(this, "English", Toast.LENGTH_SHORT).show();
-        setEnglishState(this, true);
-    }
-
-    private void chooseArabic() {
-        setLocale(this,"ar");
-        recreate();
-        Toast.makeText(this, "Arabic", Toast.LENGTH_SHORT).show();
-        setEnglishState(this, false);
-    }
-
-    @NonNull
-    @Override
-    public Lifecycle getLifecycle() {
-        return null;
     }
 }

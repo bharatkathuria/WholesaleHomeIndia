@@ -7,14 +7,12 @@ import android.support.v7.app.AppCompatActivity;
 import com.example.beckart.R;
 import com.example.beckart.storage.LoginUtils;
 
-import static com.example.beckart.storage.LanguageUtils.loadLocale;
 
 public class SplashActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        loadLocale(this);
         setContentView(R.layout.activity_splash);
 
         int SPLASH_TIME_OUT = 1000;

@@ -27,7 +27,6 @@ import com.example.beckart.utils.RequestCallback;
 
 import java.util.List;
 
-import static com.example.beckart.storage.LanguageUtils.loadLocale;
 import static com.example.beckart.utils.Constant.LOCALHOST;
 import static com.example.beckart.utils.Constant.PRODUCT;
 import static com.example.beckart.utils.Constant.PRODUCTID;
@@ -47,7 +46,6 @@ public class DetailsActivity extends AppCompatActivity implements View.OnClickLi
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        loadLocale(this);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_details);
 
         reviewViewModel = ViewModelProviders.of(this).get(ReviewViewModel.class);

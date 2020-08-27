@@ -35,7 +35,6 @@ import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 
-import static com.example.beckart.storage.LanguageUtils.loadLocale;
 import static com.example.beckart.utils.Constant.PICK_IMAGE;
 import static com.example.beckart.utils.Constant.READ_EXTERNAL_STORAGE_CODE;
 import static com.example.beckart.utils.ImageUtils.getRealPathFromURI;
@@ -51,7 +50,6 @@ public class AddProductActivity extends AppCompatActivity implements View.OnClic
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        loadLocale(this);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_add_product);
 
         ActionBar actionBar = getSupportActionBar();

@@ -16,7 +16,6 @@ import com.example.beckart.databinding.ActivityLoginBinding;
 import com.example.beckart.storage.LoginUtils;
 import com.example.beckart.utils.Validation;
 
-import static com.example.beckart.storage.LanguageUtils.loadLocale;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -27,7 +26,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        loadLocale(this);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_login);
 
         ActionBar actionBar = getSupportActionBar();

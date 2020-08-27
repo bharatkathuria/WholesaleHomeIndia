@@ -5,9 +5,7 @@ import com.example.beckart.model.CartApiResponse;
 import com.example.beckart.model.CustomerOrderApiResponse;
 import com.example.beckart.model.Favorite;
 import com.example.beckart.model.FavoriteApiResponse;
-import com.example.beckart.model.Image;
 import com.example.beckart.model.LoginApiResponse;
-import com.example.beckart.model.NewsFeedResponse;
 import com.example.beckart.model.Order;
 import com.example.beckart.model.Ordering;
 import com.example.beckart.model.Otp;
@@ -24,17 +22,14 @@ import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
-import retrofit2.http.DELETE;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.Headers;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
-import retrofit2.http.PUT;
 import retrofit2.http.Part;
 import retrofit2.http.PartMap;
-import retrofit2.http.Path;
 import retrofit2.http.Query;
 
 public interface Api {
@@ -48,12 +43,6 @@ public interface Api {
     @GET("android/api/logInUser.php")
     Call<LoginApiResponse> logInUser(@Query("email") String email, @Query("password") String password);
 
-    @DELETE("users/{userId}")
-    Call<ResponseBody> deleteAccount(@Path("userId") int userId);
-
-    @Multipart
-    @PUT("users/upload")
-    Call<ResponseBody> uploadPhoto(@Part MultipartBody.Part userPhoto, @Part("id") RequestBody userId);
 
     @FormUrlEncoded
     @POST("android/api/updatePassword.php")
@@ -63,9 +52,6 @@ public interface Api {
     @POST("android/api/insertProduct.php")
     Call<ResponseBody> insertProduct(@PartMap Map<String, RequestBody> productInfo, @Part MultipartBody.Part image);
 
-    @GET("users/getImage")
-    Call<Image> getUserImage(@Query("id") int userId);
-
     @Headers("Cache-control:no-cache")
     @GET("android/api/getOtp.php")
     Call<Otp> getOtp(@Query("email") String email);
@@ -73,7 +59,6 @@ public interface Api {
 //    @GET("products")
 //    Call<ProductApiResponse> getProducts(@Query("page") int page);
 
-    @Headers("Cache-control:no-cache")
     @GET("android/api/getProductsByCategory.php")
     Call<ProductApiResponse> getProductsByCategory(@Query("category") String category, @Query("userId") int userId,@Query("page") int page);
 
@@ -116,9 +101,6 @@ public interface Api {
     @Headers("Cache-control:no-cache")
     @GET("android/api/getAllReviews.php")
     Call<ReviewApiResponse> getAllReviews(@Query("productId") int productId);
-
-    @GET("posters")
-    Call<NewsFeedResponse> getPosters();
 
     @Headers("Cache-control:no-cache")
     @GET("android/api/getOrders.php")

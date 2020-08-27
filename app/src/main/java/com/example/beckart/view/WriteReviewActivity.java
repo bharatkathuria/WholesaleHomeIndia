@@ -24,7 +24,6 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 
-import static com.example.beckart.storage.LanguageUtils.loadLocale;
 import static com.example.beckart.utils.Constant.PRODUCT_ID;
 public class WriteReviewActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -38,7 +37,6 @@ public class WriteReviewActivity extends AppCompatActivity implements View.OnCli
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        loadLocale(this);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_write_review);
 
         ActionBar actionBar = getSupportActionBar();

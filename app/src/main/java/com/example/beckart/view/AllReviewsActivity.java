@@ -22,7 +22,6 @@ import com.example.beckart.model.ReviewApiResponse;
 
 import java.util.List;
 
-import static com.example.beckart.storage.LanguageUtils.loadLocale;
 import static com.example.beckart.utils.Constant.PRODUCT_ID;
 
 public class AllReviewsActivity extends AppCompatActivity {
@@ -36,7 +35,6 @@ public class AllReviewsActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        loadLocale(this);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_all_reviews);
 
         ActionBar actionBar = getSupportActionBar();

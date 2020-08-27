@@ -31,18 +31,18 @@
                 tools:background="@drawable/slide1" />
 
             <TextView
-                android:id="@+id/textViewMobiles"
+                android:id="@+id/textViewCutlery"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="25dp"
                 android:layout_marginTop="25dp"
-                android:text="@string/mobile"
+                android:text="@string/cutlery"
                 android:textSize="@dimen/dimen20sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/imageSlider" />
 
             <TextView
-                android:id="@+id/txtSeeAllMobiles"
+                android:id="@+id/txtSeeAllCutlery"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="25dp"
@@ -54,7 +54,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/imageSlider" />
 
             <android.support.v7.widget.RecyclerView
-                android:id="@+id/listOfMobiles"
+                android:id="@+id/listOfCutlery"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="5dp"
@@ -62,21 +62,21 @@
                 android:minHeight="370dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textViewMobiles" />
+                app:layout_constraintTop_toBottomOf="@+id/textViewCutlery" />
 
             <TextView
-                android:id="@+id/textViewLaptops"
+                android:id="@+id/textViewCookware"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="25dp"
                 android:layout_marginTop="25dp"
-                android:text="@string/laptop"
+                android:text="@string/cookware"
                 android:textSize="@dimen/dimen20sp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/listOfMobiles" />
+                app:layout_constraintTop_toBottomOf="@+id/listOfCutlery" />
 
             <TextView
-                android:id="@+id/txtSeeAllLaptops"
+                android:id="@+id/txtSeeAllCookware"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="25dp"
@@ -85,10 +85,10 @@
                 android:textColor="@color/red"
                 android:textSize="@dimen/dimen20sp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/listOfMobiles" />
+                app:layout_constraintTop_toBottomOf="@+id/listOfCutlery" />
 
             <android.support.v7.widget.RecyclerView
-                android:id="@+id/listOfLaptops"
+                android:id="@+id/listOfCookware"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="5dp"
@@ -96,7 +96,7 @@
                 android:minHeight="370dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/txtSeeAllLaptops" />
+                app:layout_constraintTop_toBottomOf="@+id/txtSeeAllCookware" />
 
             <TextView
                 android:id="@+id/textViewCookers"
@@ -107,7 +107,7 @@
                 android:text="@string/cooker"
                 android:textSize="@dimen/dimen20sp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/listOfLaptops" />
+                app:layout_constraintTop_toBottomOf="@+id/listOfCookware" />
 
             <TextView
                 android:id="@+id/txtSeeAllCookers"
@@ -119,7 +119,7 @@
                 android:textColor="@color/red"
                 android:textSize="@dimen/dimen20sp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/listOfLaptops" />
+                app:layout_constraintTop_toBottomOf="@+id/listOfCookware" />
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/listOfCookers"
@@ -142,7 +142,7 @@
             <!--                android:textSize="@dimen/dimen20sp"-->
             <!--                android:visibility="gone"-->
             <!--                app:layout_constraintStart_toStartOf="parent"-->
-            <!--                app:layout_constraintTop_toBottomOf="@+id/listOfLaptops" />-->
+            <!--                app:layout_constraintTop_toBottomOf="@+id/listOfCookware" />-->
 
             <!--            <android.support.v7.widget.RecyclerView-->
             <!--                android:id="@+id/historyList"-->
