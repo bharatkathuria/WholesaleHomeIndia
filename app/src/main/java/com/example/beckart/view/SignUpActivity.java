@@ -92,12 +92,13 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
 
 
         otpViewModel.isAccountExist(email).observe((LifecycleOwner) this, responseBody -> {
-                if (!responseBody.isError()) {
-                    goToAuthenticationActivity(email);
-                } else {
+                if (responseBody==null || responseBody.isError()) {
                     binding.userEmail.setError(responseBody.getMessage());
                     binding.userEmail.requestFocus();
                     return;
+                }
+                else {
+                    goToAuthenticationActivity(email);
                 }
             });
     }

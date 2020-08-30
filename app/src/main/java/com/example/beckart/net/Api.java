@@ -123,4 +123,8 @@ public interface Api {
     @Headers("Cache-control:no-cache")
     @GET("android/api/getProductsOfOrder.php")
     Call<StatusApiResponse> getProductsOfOrder(@Query("orderNumber") String orderNumber);
+
+    @FormUrlEncoded
+    @POST("android/api/updatePaymentInfo.php")
+    Call<ResponseBody> updatePaymentInfo(@Field("orderId") String orderId, @Field("paymentId") String paymentId, @Field("email") String email, @Field("amount") float amount);
 }

@@ -22,4 +22,8 @@ public class CheckoutViewModel  extends AndroidViewModel {
     public LiveData<ResponseBody> addOrder(Order order) {
         return checkoutRepository.addOrder(order);
     }
+
+    public LiveData<ResponseBody> updatePaymentInfo(String orderId, String paymentId, String email, float amount) {
+            return checkoutRepository.updatePaymentInfo(orderId,paymentId,email,amount);
+    }
 }

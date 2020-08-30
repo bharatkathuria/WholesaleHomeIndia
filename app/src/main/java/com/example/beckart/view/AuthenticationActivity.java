@@ -76,23 +76,26 @@ public class AuthenticationActivity extends AppCompatActivity implements View.On
     private void generateOtp(String email) {
 
         otpViewModel.getOtpCode(email).observe((LifecycleOwner) this, responseBody -> {
-            if (!responseBody.isError()) {
+            if ( responseBody ==null  || responseBody.isError()) {
+                binding.otpCode.setError(getString(R.string.incorrect_email));
+            } else {
                 correctOtpCode = responseBody.getOtp();
                 Log.d("otp",correctOtpCode);
-            } else {
-                binding.otpCode.setError(getString(R.string.incorrect_email));
             }
         });
     }
 
     private void getAnotherOtpCode() {
         otpViewModel.getOtpCode(email).observe((LifecycleOwner) this, responseBody -> {
-            if (!responseBody.isError()) {
+            if ( responseBody ==null  || responseBody.isError()) {
+                binding.otpCode.setError(getString(R.string.incorrect_email));
+            } else {
                 correctOtpCode = responseBody.getOtp();
                 binding.reSend.setEnabled(false);
                 binding.countDownTimer.setVisibility(View.VISIBLE);
                 countDownTimer(binding.countDownTimer);
             }
+
         });
     }
 

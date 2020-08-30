@@ -46,12 +46,13 @@ public class StatusActivity extends AppCompatActivity  implements StatusAdapter.
         binding.orderNumber.setText(order.getOrderNumber());
         binding.shippingAddress.setText(order.getShippingAddress());
         binding.userName.setText(LoginUtils.getInstance(this).getUserInfo().getName());
+        binding.orderStatus.setText(order.getOrderStatus());
         binding.deliveryStatus.setText(order.getDeliveryStatus());
         binding.itemCount.setText(String.valueOf(order.getTotalQuantity()));
         binding.orderAmount.setText(String.valueOf(order.getOrderAmount()));
         binding.shippingAmount.setText(String.valueOf(order.getShippingAmount()));
         binding.totalAmount.setText(String.valueOf(order.getTotalAmount()));
-        binding.paymentStatus.setText(String.valueOf(order.getPaymentStatus()));
+        binding.paymentStatus.setText(order.getTransactionId());
 
         setUpRecyclerViews();
 
@@ -60,9 +61,10 @@ public class StatusActivity extends AppCompatActivity  implements StatusAdapter.
     }
 
     private void setUpRecyclerViews() {
-        LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
-        binding.productList.setLayoutManager(layoutManager);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
         binding.productList.setHasFixedSize(true);
+        binding.productList.setLayoutManager(layoutManager);
+        binding.productList.setItemAnimator(null);
 
         DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(this, layoutManager.getOrientation());
         binding.productList.addItemDecoration(dividerItemDecoration);

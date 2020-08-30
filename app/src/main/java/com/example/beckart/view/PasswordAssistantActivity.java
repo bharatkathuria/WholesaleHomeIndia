@@ -49,12 +49,12 @@ public class PasswordAssistantActivity extends AppCompatActivity implements View
         }
 
         otpViewModel.isEmailExist(userEmail).observe((LifecycleOwner) this, responseBody -> {
-            if (!responseBody.isError()) {
+            if ( responseBody ==null  || responseBody.isError()) {
+                binding.emailAddress.setError(responseBody.getMessage());
+            } else {
                 userId = responseBody.getUserId();
                 otpCode = responseBody.getOtp();
                 goToAuthenticationActivity();
-            } else {
-                binding.emailAddress.setError(responseBody.getMessage());
             }
         });
     }

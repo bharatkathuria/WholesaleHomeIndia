@@ -34,11 +34,6 @@ public class CheckoutRepository {
         RetrofitClient.getInstance().getApi().addOrder(order).enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                try {
-                    Log.d(TAG, "onResponse: " + response.body().string());
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
                     ResponseBody responseBody =  response.body();
                 if (response.body() != null) {
                     mutableLiveData.setValue(responseBody);
@@ -55,7 +50,27 @@ public class CheckoutRepository {
     }
 
 
+    public LiveData<ResponseBody> updatePaymentInfo(String orderId, String paymentId, String email, float amount) {
 
+        final MutableLiveData<ResponseBody> mutableLiveData = new MutableLiveData<>();
 
+        RetrofitClient.getInstance().getApi().updatePaymentInfo(orderId,paymentId,email,amount).enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                ResponseBody responseBody =  response.body();
+                if (response.body() != null) {
+                    mutableLiveData.setValue(responseBody);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                Log.d(TAG, "onFailure: " + t.getMessage());
+            }
+        });
+
+        return mutableLiveData;
+
+    }
 }
 

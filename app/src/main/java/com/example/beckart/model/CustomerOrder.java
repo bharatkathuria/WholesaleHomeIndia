@@ -26,8 +26,10 @@ public class CustomerOrder implements Serializable {
     private int totalQuantity;
     @SerializedName("transaction_id")
     private String transactionId;
+    @SerializedName("order_status")
+    private String orderStatus;
 
-    public CustomerOrder(String orderNumber, Float orderAmount, String orderDate, String paymentStatus, String deliveryStatus, Float shippingAmount, String shippingAddress, Float totalAmount, int totalQuantity, String transactionId) {
+    public CustomerOrder(String orderNumber, Float orderAmount, String orderDate, String paymentStatus, String deliveryStatus, Float shippingAmount, String shippingAddress, Float totalAmount, int totalQuantity, String transactionId, String orderStatus) {
         this.orderNumber = orderNumber;
         this.orderAmount = orderAmount;
         this.orderDate = orderDate;
@@ -38,6 +40,11 @@ public class CustomerOrder implements Serializable {
         this.totalAmount = totalAmount;
         this.totalQuantity = totalQuantity;
         this.transactionId = transactionId;
+        this.orderStatus = orderStatus;
+    }
+
+    public String getOrderStatus() {
+        return orderStatus;
     }
 
     public String getPaymentStatus() {

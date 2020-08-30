@@ -61,6 +61,17 @@ public class Order implements Serializable {
         return userEmail;
     }
 
+    public Order(String orderData, int totalQuantity, Float orderAmount, Float shippingAmount, Float totalAmount, String shippingAddress, int userId, String userEmail) {
+        this.orderData = orderData;
+        this.totalQuantity = totalQuantity;
+        this.orderAmount = orderAmount;
+        this.shippingAmount = shippingAmount;
+        this.totalAmount = totalAmount;
+        this.shippingAddress = shippingAddress;
+        this.userId = userId;
+        this.userEmail = userEmail;
+    }
+
     public Order(String orderNumber, String orderData, int totalQuantity, Float orderAmount, Float shippingAmount, Float totalAmount, String shippingAddress, int userId, String userEmail) {
         this.orderNumber = orderNumber;
         this.orderData = orderData;

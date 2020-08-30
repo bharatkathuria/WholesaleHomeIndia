@@ -193,8 +193,13 @@
     <string name="enter_a_valid_phoneno" >Enter Valid Phone No</string>
     <string name="enter_a_valid_zip">Enter Valid Zip</string>
     <string name="delivery_status">Delivery Status:</string>
-    <string name="payment_status">Payment Status:</string>
+    <string name="payment_status">Transaction Id:</string>
     <string name="account_already_exist">Account Already Exist..</string>
+    <string name="back_button">! Please Don\'t Press Back Button..</string>
+    <string name="we_are_processing_your_order_please_wait">We Are Processing your Order Please wait..</string>
+    <string name="india">INDIA</string>
+    <string name="swiperight"><![CDATA[<---]]></string>
+    <string name="order_status">Order Status:</string>
 
     <string-array name="categories_array">
         <item>Pressure Cooker</item>

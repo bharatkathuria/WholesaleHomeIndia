@@ -3,15 +3,101 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <LinearLayout
+        android:id="@+id/checkoutLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
         tools:context=".view.CheckoutActivity">
 
+
+    <RelativeLayout
+        android:id="@+id/processing"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_gravity="center"
+            android:src="@drawable/splash" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:textStyle="bold|italic"
+            android:padding="12dp"
+            android:textSize="@dimen/dimen18sp"
+            android:text="@string/we_are_processing_your_order_please_wait"
+            android:textColor="@color/blue" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/dimen20dp"
+            android:padding="12dp"
+            android:textStyle="bold"
+            android:textSize="@dimen/dimen18sp"
+            android:text="@string/back_button"
+            android:textColor="@color/black" />
+    </RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/fail"
+            android:visibility="gone"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_gravity="center"
+                android:src="@drawable/down" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:textStyle="bold|italic"
+                android:padding="12dp"
+                android:textSize="@dimen/dimen18sp"
+                android:text="Payment Failed.."
+                android:textColor="@color/red" />
+        </RelativeLayout>        <RelativeLayout
+            android:id="@+id/success"
+            android:visibility="gone"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_gravity="center"
+                android:src="@drawable/up" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:textStyle="bold|italic"
+                android:padding="12dp"
+                android:textSize="@dimen/dimen18sp"
+                android:text="Payment Successful.."
+                android:textColor="@color/blue" />
+        </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/checkoutBox"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="visible"
+        android:orientation="vertical">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
+            android:visibility="visible"
             android:background="@color/lightGray"
             android:orientation="horizontal">
 
@@ -328,5 +414,6 @@
             android:textColor="@color/white"
             android:textSize="@dimen/dimen25sp"
             android:textStyle="bold" />
+    </LinearLayout>
     </LinearLayout>
 </layout>
