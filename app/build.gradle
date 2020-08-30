@@ -4,7 +4,7 @@ android {
     buildToolsVersion "29.0.3"
 
     defaultConfig {
-        applicationId "com.example.beckart"
+        applicationId "com.becxpress.whi"
         minSdkVersion 21
         targetSdkVersion 29
         versionCode 1
@@ -15,6 +15,7 @@ android {
 
     buildTypes {
         release {
+            debuggable = false
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
